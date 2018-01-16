@@ -81,6 +81,7 @@ installEnv(){
 		check_and_install_soft mysql-server
 		apt install libmysqlclient-dev -y
 		print_log "安装mysql已完成" info
+		configMysql
 	else
 		print_log "未配置安装mysql，跳过安装" warn
 	fi
@@ -90,6 +91,7 @@ installEnv(){
 	if [ $install_nginx -gt 0 ]; then	
 		check_and_install_soft nginx
 		print_log "安装nginx已完成" info
+		
 	else
 		print_log "未配置安装nginx，跳过安装" warn
 	fi
@@ -180,10 +182,12 @@ clearEnv(){
 	print_log "卸载redis-server已完成" "info"	
 }
 # ----------------------------
-# 预处理特殊字符
+# 配置mysql
 # ----------------------------
-prepareVar(){
-	print_log "预处理数据" info
-	#mysql_root_pass=${mysql_root_pass//&/\\&}
-	#mysql_pass=${mysql_pass//&/\\&}
+configMysql(){
+	print_log "配置mysql" info
+	# 配置mysql编码
+    cp "$__ScriptDir/mysqlutf8.cnf" "/etc/mysql/mysql.conf.d/mysqlutf8.cnf" -rf
+    # 配置mysql
+    service mysql restart
 }
