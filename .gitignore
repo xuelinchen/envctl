@@ -1,4 +1,4 @@
 *.log
 .project
 .buildpath
-/.settings/
+.settings
