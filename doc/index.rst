@@ -14,6 +14,7 @@
    使用方法 <usage>
    更新记录 <release>
    业务支撑系统配置 <config_ebss>
+   业务支撑系统打包 <package_ebss>
 
 
 Indices and tables
