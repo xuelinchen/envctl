@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1. 使用方法 &mdash; envctl  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="envctl  documentation" href="index.html"/>
+        <link rel="next" title="2. 更新记录" href="release.html"/>
+        <link rel="prev" title="安装删除软件脚本" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> envctl
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. 使用方法</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1.1. 远程下载版本</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">1.2. 查看版本及使用方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">1.3. 安装软件</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mysql">1.3.1. 安装mysql</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#redis">1.3.2. 安装redis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nginx">1.3.3. 安装nginx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#apache">1.3.4. 安装apache</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#php">1.3.5. 安装php</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">1.3.6. 安装所有</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">1.4. 卸载软件</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">1.4.1. 卸载mysql</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">1.4.2. 卸载redis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">1.4.3. 卸载nginx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">1.4.4. 卸载apache</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">1.4.5. 卸载php</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">1.4.6. 卸载所有</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="release.html">2. 更新记录</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">envctl</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>1. 使用方法</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>1. 使用方法<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>1.1. 远程下载版本<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>mkdir bin &amp;&amp; cd bin &amp;&amp; curl -LO <a class="reference external" href="http://10.0.0.29/envctl/envctl.sh">http://10.0.0.29/envctl/envctl.sh</a></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>1.2. 查看版本及使用方法<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>./envctl.sh 或 ./envctl.sh help</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>1.3. 安装软件<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mysql">
+<h3>1.3.1. 安装mysql<a class="headerlink" href="#mysql" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>./envctl.sh install mysql ‘mysqlrootpassword’</li>
+<li>./envctl.sh install mysql 不带第三个参数，缺省密码是C1oudP8x&amp;2017</li>
+</ul>
+</div>
+<div class="section" id="redis">
+<h3>1.3.2. 安装redis<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>./envctl.sh install redis</li>
+</ul>
+</div>
+<div class="section" id="nginx">
+<h3>1.3.3. 安装nginx<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>./envctl.sh install nginx</li>
+</ul>
+</div>
+<div class="section" id="apache">
+<h3>1.3.4. 安装apache<a class="headerlink" href="#apache" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>./envctl.sh install apache</li>
+</ul>
+</div>
+<div class="section" id="php">
+<h3>1.3.5. 安装php<a class="headerlink" href="#php" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>./envctl.sh install php</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h3>1.3.6. 安装所有<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>./envctl.sh install all 顺序安装以上软件</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>1.4. 卸载软件<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h3>1.4.1. 卸载mysql<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>./envctl.sh remove mysql</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h3>1.4.2. 卸载redis<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>./envctl.sh remove redis</li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h3>1.4.3. 卸载nginx<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>./envctl.sh remove nginx</li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h3>1.4.4. 卸载apache<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>./envctl.sh remove apache</li>
+</ul>
+</div>
+<div class="section" id="id11">
+<h3>1.4.5. 卸载php<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>./envctl.sh remove php</li>
+</ul>
+</div>
+<div class="section" id="id12">
+<h3>1.4.6. 卸载所有<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>./envctl.sh remove all 顺序卸载以上软件</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="release.html" class="btn btn-neutral float-right" title="2. 更新记录" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="安装删除软件脚本" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, cxl.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

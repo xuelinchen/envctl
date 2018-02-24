@@ -26,7 +26,7 @@
 __ScriptFullName=$(readlink -f $0)  
 __ScriptName=$(basename $__ScriptFullName)
 __ScriptDir=$(dirname $__ScriptFullName)
-__ScriptVersion='envctl-20180223162251'
+__ScriptVersion='envctl-20180224120819'
 __CurrentUser=$(whoami)
 __LogPath=$__ScriptDir/log/envctl/
 __LogFile=$__LogPath`date +'%Y%m%d'`.log
@@ -183,7 +183,7 @@ EOF
     service mysql restart
 }
 # ----------------------------
-# 安装mysql
+# 卸载mysql
 # ---------------------------- 
 remove_mysql(){
     check_and_remove_soft mysql-common && status=0 || status=1  
@@ -196,42 +196,113 @@ remove_mysql(){
     fi
     cxl_log "卸载mysql已完成" "info"
 }
-
-
 # ----------------------------
-# 执行mysql命令行
-# ----------------------------
-mysql_cli(){
-    if [ -z "$1" ] ; then return 1; fi
-    local sql="$1"  
-    local cmdLine="mysql -u'${db_user}' -p'${db_pwd}' -h "${db_host}" -P ${db_port}  -e \"$sql\"  2>/dev/null | awk '{print}'"
-    #echo $cmdLine
-    eval "$cmdLine"
-    #echo "pipestatus:"${PIPESTATUS[0]}"****"
-    return ${PIPESTATUS[0]}
+# 安装redis
+# ---------------------------- 
+install_redis(){
+    check_and_install_soft redis-server
+    cxl_log "安装redis已完成" info
 }
 # ----------------------------
-# 执行mysql命令行
-# ----------------------------
-mysql_csv(){
-    if [ -z "$1" ] ; then return 1; fi
-    if [ -z "$2" ] ; then return 1; fi
-    local sql="$1"  
-    local cmdLine="mysql -u'${db_user}' -p'${db_pwd}' -h "${db_host}" -P ${db_port} --local-infile=1 -e \"$sql into outfile '/var/lib/mysql-files/$2.csv' fields terminated by ',' optionally enclosed by '\\\"' lines terminated by '\\\n'\"  2>/dev/null"
-    eval "$cmdLine"
-    mv /var/lib/mysql-files/$2.csv $__ScriptDir/data/$2.csv
-    return 0
+# 卸载redis
+# ---------------------------- 
+remove_redis(){
+    check_and_remove_soft redis-server && status=0 || status=1
+    if [ $status = 0 ]; then cxl_log "删除redis配置文件" "info" ; rm /etc/redis -rf; fi
+    cxl_log "卸载redis-server已完成" "info"    
 }
 # ----------------------------
-# 配置mysql
+# 安装nginx
+# ---------------------------- 
+install_nginx(){
+    check_and_install_soft nginx
+    cxl_log "安装nginx已完成" info
+}
 # ----------------------------
-configMysql(){
-    # 配置mysql编码
-    cp mysqlutf8.cnf /etc/mysql/mysql.conf.d/mysqlutf8.cnf -rf
-    # 配置mysql
-    service mysql restart
+# 卸载nginx
+# ---------------------------- 
+remove_nginx(){
+    check_and_remove_soft nginx-common && status=0 || status=1
+    if [ $status = 0 ]; then cxl_log "删除nginx配置文件" "warn" ; rm /etc/nginx -rf; fi
+    cxl_log "卸载nginx已完成" "info" 
 }
 
+# ----------------------------
+# 安装apache
+# ---------------------------- 
+install_apache(){
+    check_and_install_soft apache2
+    cxl_log "安装apache已完成" info
+    cxl_log "停止apache模块mpm_event,mpm_prefork,打开mpm_worker,rewrite,proxy_fcgi" info
+    a2dismod mpm_event
+    a2dismod mpm_prefork
+    a2enmod mpm_worker rewrite proxy_fcgi
+}
+# ----------------------------
+# 卸载apache
+# ---------------------------- 
+remove_apache(){
+    check_and_remove_soft apache2 && status=0 || status=1
+    if [ $status = 0 ]; then cxl_log "删除apache2配置文件" "warn" ; rm /etc/apache2 -rf; fi
+    cxl_log "卸载apache2已完成" "info"
+}
+
+# ----------------------------
+# 安装php
+# ---------------------------- 
+install_php(){
+    check_and_install_soft php7.0 && status=0 || status=1
+    if [ $status != 0 ]; then
+        cxl_log "php7.0安装失败，跳过安装依赖库" "error"
+    else
+        print_log "准备安装php7.0依赖库" "info"
+        check_and_install_soft php7.0-curl
+        check_and_install_soft php7.0-mbstring
+        check_and_install_soft php7.0-gd
+        check_and_install_soft php7.0-mysql
+        check_and_install_soft php-redis
+        check_and_install_soft mcrypt
+        check_and_install_soft libmcrypt-dev
+        check_and_install_soft php-mcrypt
+        check_and_install_soft php7.0-bcmath
+        #check_and_install_soft libapache2-mod-fastcgi
+        cxl_log "停止apache模块php7.0，启用php7.0-fpm配置文件" 'info'
+        a2dismod php7.0
+        a2enconf php7.0-fpm
+    fi
+}
+# ----------------------------
+# 卸载php
+# ---------------------------- 
+remove_php(){
+    check_and_remove_soft libapache2-mod-php7.0
+    check_and_remove_soft libapache2-mod-fastcgi
+    check_and_remove_soft php7.0-mysql
+    check_and_remove_soft php-common && status=0 || status=1
+    cxl_log "卸载php7.0已完成" "info"
+    if [ $status = 0 ]; then cxl_log "删除php7.0配置文件" "warn" ; rm /etc/php -rf; fi
+}
+
+# ----------------------------
+# 安装all
+# ---------------------------- 
+install_all(){
+    install_mysql
+    install_redis
+    install_nginx
+    install_apache
+    install_php
+}
+# ----------------------------
+# 卸载all
+# ---------------------------- 
+remove_all(){
+    remove_redis
+    remove_nginx
+    remove_php
+    remove_apache
+    remove_mysql
+}
 is_ubuntu 16.04 && status=0 || status=1
 if [  "$status" -gt 0 ]; then cxl_log "当前系统非ubuntu 16.04，此安装程序只在ubuntu16.04上做过测试" "error"; return 2; fi
 

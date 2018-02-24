@@ -77,10 +77,20 @@ is_ubuntu 16.04 && status=0 || status=1
 if [  "$status" -gt 0 ]; then cxl_log "当前系统非ubuntu 16.04，此安装程序只在ubuntu16.04上做过测试" "error"; return 2; fi
 
 cxl_log "创建目录/var/www/html/envctl"
-ssh doc29 "mkdir /var/www/html/envctl -p"
+ssh doc29 "mkdir /var/www/html/envctl/doc -p"
 cxl_log "设置版本"
 version="envctl-"`date +'%Y%m%d%H%M%S'`
 sed -ri "s#(__ScriptVersion=).*#\1'$version'#" envctl.sh
+sed -ri "s#(__ScriptVersion=).*#\1'$version'#" config_ebss.sh
+sed -i "s/<%NEWVERSION%>/$version/" doc/release.rst 
+cxl_log "生成文档"
+cd doc && make html 
+cd ..
+cxl_log "生成ebss配置包"
+tar zcvf config_ebss.tar config_ebss.sh crt/ res/ 
 cxl_log "远程拷贝文件"
 scp envctl.sh root@doc29:/var/www/html/envctl/
+scp config_ebss.tar root@doc29:/var/www/html/envctl/
+rm config_ebss.tar -f
+scp -r doc/_build/html/* root@doc29:/var/www/html/envctl/doc/  
 ssh doc29 "chmod 777 /var/www/html/envctl -R"
