@@ -2,7 +2,7 @@
 
 ######################################
 # 
-# 脚本名称: config_ebss.sh
+# 脚本名称: package_ebss.sh
 #
 # 描述：
 #       配置业务支撑系统脚本
@@ -12,10 +12,6 @@
 #		2. 环境检查失败
 #
 # 作者: chenxuelin@emicnet.com
-# 下载脚本
-#   curl -LO http://10.0.0.29/envctl/config_ebss.sh
-# 配置mysql
-#   ./config_ebss.sh mysql
 #
 ######################################
 
@@ -23,7 +19,7 @@
 __ScriptFullName=$(readlink -f $0)  
 __ScriptName=$(basename $__ScriptFullName)
 __ScriptDir=$(dirname $__ScriptFullName)
-__ScriptVersion='package-20180224120819'
+__ScriptVersion='package-ebss-20180224120819'
 __CurrentUser=$(whoami)
 __LogPath=$__ScriptDir/log/package/
 __LogFile=$__LogPath`date +'%Y%m%d'`.log
@@ -168,7 +164,7 @@ git push origin master
 #composer安装依赖
 cxl_log "composer安装依赖"
 mkdir thinkphp
-# 由于以root身份运行update脚本，屏蔽第三方脚本保证安全
+# 由于以root身份运行composer update脚本，屏蔽第三方脚本保证安全
 composer update --no-plugins --no-scripts
 cxl_log "生成文档目录"
 cd doc && make html 
