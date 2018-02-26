@@ -23,7 +23,7 @@
 __ScriptFullName=$(readlink -f $0)  
 __ScriptName=$(basename $__ScriptFullName)
 __ScriptDir=$(dirname $__ScriptFullName)
-__ScriptVersion='envctl-20180224120819'
+__ScriptVersion='envctl-20180224171815'
 __CurrentUser=$(whoami)
 __LogPath=$__ScriptDir/log/envctl/
 __LogFile=$__LogPath`date +'%Y%m%d'`.log

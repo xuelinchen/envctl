@@ -93,4 +93,5 @@ scp envctl.sh root@doc29:/var/www/html/envctl/
 scp config_ebss.tar root@doc29:/var/www/html/envctl/
 rm config_ebss.tar -f
 scp -r doc/_build/html/* root@doc29:/var/www/html/envctl/doc/  
+scp docgram/index_project.php root@doc29:/var/www/html/index.php 
 ssh doc29 "chmod 777 /var/www/html/envctl -R"

@@ -11,9 +11,12 @@ try {
   $dirs = scandir('.');
   foreach($dirs as $dir){
     if('.' == $dir || '..' == $dir || is_file($dir)) continue;
-    echo "<div>";
-    echo "<p><a href='/$dir/doc'>$dir文档</a></p>";
-    echo "</div>";
+    echo "<p>";
+    echo "<a href='/$dir/doc'>".$dir."文档</a>";
+    if(is_dir($dir.'/release')){
+    	echo "-----<a href='/$dir/release'>".$dir."版本</a>";
+    }
+    echo "</p>";
   }
 } catch (Exception $e) {
   echo $e->getMessage();

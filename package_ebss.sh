@@ -146,9 +146,9 @@ cd $packageDir
 
 cxl_log "checkout end from git"
 if [ -d "ebss" ]; then
-    cd ebss && git pull origin master
+    chmod 777 ebss -R && cd ebss && git pull origin master
 else
-    git clone git@gitlab28:websrc/ebss.git && cd ebss
+    git clone git@gitlab28:websrc/ebss.git && chmod 777 ebss -R && cd ebss
 fi
 cxl_log "生成新版本号"
 version=`add_version`
@@ -165,8 +165,12 @@ git add public/sn.json
 git commit -m 'add version by package'
 git push origin master
 
+#composer安装依赖
+cxl_log "composer安装依赖"
+mkdir thinkphp
+# 由于以root身份运行update脚本，屏蔽第三方脚本保证安全
+composer update --no-plugins --no-scripts
 cxl_log "生成文档目录"
-
 cd doc && make html 
 cd ..
 ssh doc29 "mkdir /var/www/html/ebss/doc -p"
