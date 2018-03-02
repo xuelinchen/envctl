@@ -152,7 +152,8 @@ if [ -z "$version" ]; then
     cxl_log "获取版本号失败"
     exit 1
 fi
-sed -i "s/<%NEWVERSION%>/$version/" doc/release.rst 
+makeDate=`date +'%Y-%m-%d %H:%M:%S'`
+sed -i "s/<%NEWVERSION%>/$version-$makeDate/" doc/release.rst 
 cxl_log "添加新版本号到版本库:$ver"
 
 git add doc/release.rst 
