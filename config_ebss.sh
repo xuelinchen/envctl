@@ -305,13 +305,13 @@ config_php(){
         else
             set_config_value "$php_fpm_phpini" "max_input_time" "150"
         fi
-        cxl_log "开始配置$php_fpm_phpini页面内存数memory_limit=128M" info
-        local max_input_time=`get_config_value "$php_fpm_phpini" "memory_limit"`
-        if [ -z "$memory_limit" ]; then
-            echo "memory_limit=128M" >> "$php_fpm_phpini"
-        else
-            set_config_value "$php_fpm_phpini" "memory_limit" "128M"
-        fi
+        #cxl_log "开始配置$php_fpm_phpini页面内存数memory_limit=128M" info
+        #local max_input_time=`get_config_value "$php_fpm_phpini" "memory_limit"`
+        #if [ -z "$memory_limit" ]; then
+        #    echo "memory_limit=128M" >> "$php_fpm_phpini"
+        #else
+        #    set_config_value "$php_fpm_phpini" "memory_limit" "128M"
+        #fi
         cxl_log "开始配置$php_fpm_phpini最大上传文件大小upload_max_filesize=100M" info
         local upload_max_filesize=`get_config_value "$php_fpm_phpini" "upload_max_filesize"`
         if [ -z "$upload_max_filesize" ]; then
@@ -338,13 +338,13 @@ config_php(){
         else
             set_config_value "$php_cli_phpini" "max_execution_time" "600"
         fi
-        cxl_log "开始配置$php_cli_phpini脚本消费内存数memory_limit=256M" info
-        local max_input_time=`get_config_value "$php_cli_phpini" "memory_limit"`
-        if [ -z "$memory_limit" ]; then
-            echo "memory_limit=256M" >> "$php_cli_phpini"
-        else
-            set_config_value "$php_cli_phpini" "memory_limit" "256M"
-        fi
+        #cxl_log "开始配置$php_cli_phpini脚本消费内存数memory_limit=256M" info
+        #local max_input_time=`get_config_value "$php_cli_phpini" "memory_limit"`
+        #if [ -z "$memory_limit" ]; then
+        #    echo "memory_limit=256M" >> "$php_cli_phpini"
+        #else
+        #    set_config_value "$php_cli_phpini" "memory_limit" "256M"
+        #fi
     fi
 }
 

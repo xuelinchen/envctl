@@ -176,6 +176,11 @@ scp -r doc/_build/html/* root@doc29:/var/www/html/ebss/doc/
 cxl_log "建立打包目录"
 cd ..
 cxl_log "checkout front from git"
+if [ -d "emicBss_front" ]; then
+    chmod 777 emicBss_front -R && cd emicBss_front && git pull origin master && cd ..
+else
+    git clone git@gitlab28:websrc/emicBss_front.git
+fi
 if [ -d "emicBss_front/dist" ]; then
     cxl_log "拷贝前端程序到包目录"
     cp emicBss_front/dist/* ebss/public/ -rf
