@@ -165,7 +165,7 @@ git push origin master
 
 #composer安装依赖
 cxl_log "composer安装依赖"
-mkdir thinkphp
+if [ ! -d "thinkphp" ]; then mkdir thinkphp; fi
 # 由于以root身份运行composer update脚本，屏蔽第三方脚本保证安全
 composer update --no-plugins --no-scripts
 cxl_log "生成文档目录"
@@ -177,10 +177,10 @@ cxl_log "建立打包目录"
 cd ..
 cxl_log "checkout front from git"
 if [ -d "emicBss_front" ]; then
-    chmod 777 emicBss_front -R && cd emicBss_front && git pull origin master && cd ..
-else
-    git clone git@gitlab28:websrc/emicBss_front.git
+    cxl_log "删除目录emicBss_front"
+    rm emicBss_front -rf
 fi
+git clone git@gitlab28:websrc/emicBss_front.git
 if [ -d "emicBss_front/dist" ]; then
     cxl_log "拷贝前端程序到包目录"
     cp emicBss_front/dist/* ebss/public/ -rf
@@ -192,7 +192,7 @@ tar -czvf $tarfilename ebss/
 cxl_log "拷贝包到release目录"
 ssh doc29 "mkdir /var/www/html/ebss/release -p"
 scp $tarfilename  root@doc29:/var/www/html/ebss/release/ 
-rm $tarfilename -f
+#rm $tarfilename -f
 cd ..
 scp docgram/index_release.php  root@doc29:/var/www/html/ebss/release/index.php
 cxl_log "*********end***********"
