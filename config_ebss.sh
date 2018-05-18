@@ -226,7 +226,7 @@ config_nginx(){
         done
         cp res/nginx_ssl.conf nginx_bss.conf
         sed -i "s/NGINXPROXYPASSADDR/$nginxproxypass/g" nginx_bss.conf
-        sed -i "s/NGINXPUBLISHPORT/1068/g" nginx_bss.conf
+        sed -i "s/NGINXPUBLISHPORT/2013/g" nginx_bss.conf
         cxl_log "拷贝发布文件到发布目录" "warn"
         cp nginx_bss.conf /etc/nginx/sites-available/nginx_bss.conf -rf
         if [ ! -f "/etc/nginx/sites-enabled/nginx_bss.conf" ]; then
