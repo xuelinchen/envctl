@@ -12,6 +12,7 @@
 #		2. 环境检查失败
 #
 # 作者: chenxuelin@emicnet.com
+# curl -LO http://10.0.0.29/ebss/release/ebss-0.0.35.tar
 #
 ######################################
 

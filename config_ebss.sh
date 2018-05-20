@@ -13,7 +13,7 @@
 #
 # 作者: chenxuelin@emicnet.com
 # 下载脚本
-#   curl -LO http://10.0.0.29/envctl/config_ebss.sh
+#   curl -LO http://10.0.0.29/envctl/config_ebss.tar && tar -zxf config_ebss.tar
 # 配置mysql
 #   ./config_ebss.sh mysql
 #
@@ -23,7 +23,7 @@
 __ScriptFullName=$(readlink -f $0)  
 __ScriptName=$(basename $__ScriptFullName)
 __ScriptDir=$(dirname $__ScriptFullName)
-__ScriptVersion='envctl-20180302101929'
+__ScriptVersion='envctl-20180518160826'
 __CurrentUser=$(whoami)
 __LogPath=$__ScriptDir/log/envctl/
 __LogFile=$__LogPath`date +'%Y%m%d'`.log
