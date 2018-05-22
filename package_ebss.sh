@@ -191,7 +191,7 @@ fi
 
 cxl_log "打包后台安装包"
 tarfilename="ebss-$version.tar"
-tar -czvf $tarfilename ebss/
+tar -czf $tarfilename ebss/
 cxl_log "拷贝包到release目录"
 ssh doc29 "mkdir /var/www/html/ebss/release -p"
 scp $tarfilename  root@doc29:/var/www/html/ebss/release/ 
