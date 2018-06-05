@@ -166,7 +166,7 @@ git push origin master
 
 #composer安装依赖
 cxl_log "composer安装依赖"
-chmod * -R
+chmod 777 * -R
 #if [ ! -d "thinkphp" ]; then mkdir thinkphp; fi
 # 由于以root身份运行composer update脚本，屏蔽第三方脚本保证安全
 #composer update --no-plugins --no-scripts
